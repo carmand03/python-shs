@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QCM de fin de formation — Python pour les SHS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2430;
+    --ink-soft:#4A5266;
+    --paper:#F3EFE3;
+    --paper-deep:#E9E2CC;
+    --paper-card:#FBF9F2;
+    --rule:#CBBF9E;
+    --brass:#A07A33;
+    --brass-deep:#7C5C24;
+    --rust:#A54B36;
+    --rust-bg:#F3E1DA;
+    --brass-bg:#EFE4C6;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px);
+    background-size: 100% 2.1em;
+    background-position: 0 11.2em;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  code, .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  a{color:var(--brass-deep);}
+
+  /* ===== Header ===== */
+  header.hero{
+    background:var(--ink);
+    color:var(--paper);
+    padding:3.2rem 1.5rem 2.6rem;
+    position:relative;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0;
+    height:6px;
+    background:repeating-linear-gradient(90deg, var(--brass) 0 14px, transparent 14px 22px);
+    opacity:.55;
+  }
+  .hero-inner{max-width:760px; margin:0 auto;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#C9BE9E;
+    margin-bottom:.9rem;
+    display:flex; align-items:center; gap:.6em;
+  }
+  .eyebrow::before{content:"◆"; color:var(--brass); font-size:.7em;}
+  h1{
+    font-family:'Source Serif 4', serif;
+    font-weight:700;
+    font-size:2.15rem;
+    line-height:1.2;
+    margin:0 0 .8rem;
+    letter-spacing:-.01em;
+  }
+  .hero-desc{
+    color:#D8D2BE;
+    font-size:1.02rem;
+    max-width:58ch;
+    margin:0 0 1.6rem;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:1.6rem;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.82rem;
+    color:#C9BE9E;
+    border-top:1px solid #3A4256;
+    padding-top:1rem;
+  }
+  .hero-meta b{color:var(--paper); font-weight:600;}
+
+  /* ===== Section rail ===== */
+  .rail-wrap{
+    position:sticky; top:0; z-index:30;
+    background:var(--paper-deep);
+    border-bottom:1px solid var(--rule);
+  }
+  .rail{
+    max-width:800px; margin:0 auto;
+    display:flex; overflow-x:auto;
+    padding:0 1rem;
+  }
+  .rail::-webkit-scrollbar{height:5px;}
+  .rail::-webkit-scrollbar-thumb{background:var(--rule);}
+  .rail-tab{
+    flex:0 0 auto;
+    padding:.75rem .9rem .65rem;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.03em;
+    color:var(--ink-soft);
+    text-decoration:none;
+    border-bottom:3px solid transparent;
+    white-space:nowrap;
+    display:flex; align-items:center; gap:.45em;
+    transition:border-color .2s, color .2s;
+  }
+  .rail-tab .num{
+    font-weight:600; color:var(--brass-deep);
+  }
+  .rail-tab .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--rule);
+    margin-left:.3em;
+  }
+  .rail-tab.complete .dot{background:var(--brass);}
+  .rail-tab:hover{border-bottom-color:var(--rule);}
+  .rail-tab.active{border-bottom-color:var(--brass); color:var(--ink);}
+
+  .progress-track{
+    height:3px; background:var(--rule);
+    max-width:800px; margin:0 auto;
+  }
+  .progress-fill{
+    height:100%; background:var(--brass);
+    width:0%; transition:width .25s ease;
+  }
+
+  /* ===== Main ===== */
+  main{max-width:760px; margin:0 auto; padding:2.4rem 1.5rem 8rem;}
+
+  .intro-note{
+    background:var(--paper-card);
+    border:1px solid var(--rule);
+    border-left:4px solid var(--brass);
+    padding:1rem 1.2rem;
+    font-size:.92rem;
+    color:var(--ink-soft);
+    margin-bottom:2.6rem;
+  }
+  .intro-note strong{color:var(--ink);}
+
+  .section-heading{
+    display:flex; align-items:baseline; gap:.7em;
+    margin:3.2rem 0 1.4rem;
+    padding-bottom:.5rem;
+    border-bottom:2px solid var(--ink);
+  }
+  .section-heading:first-of-type{margin-top:0;}
+  .section-heading .idx{
+    font-family:'Source Serif 4', serif;
+    font-size:1.9rem;
+    font-weight:700;
+    color:var(--brass-deep);
+  }
+  .section-heading .title{
+    font-family:'Source Serif 4', serif;
+    font-size:1.35rem;
+    font-weight:600;
+  }
+  .section-heading .time{
+    margin-left:auto;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.75rem;
+    color:var(--ink-soft);
+  }
+
+  /* ===== Question card ===== */
+  .qcard{
+    background:var(--paper-card);
+    border:1px solid var(--rule);
+    border-left:4px solid var(--rule);
+    padding:1.3rem 1.4rem 1.2rem;
+    margin-bottom:1.1rem;
+    transition:border-left-color .25s, box-shadow .25s;
+  }
+  .qcard.correct{border-left-color:var(--brass); box-shadow:0 1px 0 var(--brass-bg);}
+  .qcard.incorrect{border-left-color:var(--rust); box-shadow:0 1px 0 var(--rust-bg);}
+
+  .qcard .qnum{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    color:var(--ink-soft);
+    letter-spacing:.06em;
+    margin-bottom:.4rem;
+    display:block;
+  }
+  .qcard .qtext{
+    font-size:1rem;
+    font-weight:500;
+    margin:0 0 .8rem;
+    color:var(--ink);
+  }
+  .qcard pre{
+    background:var(--ink);
+    color:#E9E2CC;
+    padding:.75rem .9rem;
+    font-size:.82rem;
+    overflow-x:auto;
+    margin:0 0 .9rem;
+    border-radius:2px;
+  }
+  .qcard pre code{color:inherit;}
+
+  .options{list-style:none; margin:0; padding:0;}
+  .options li{
+    border-top:1px dashed var(--rule);
+  }
+  .options li:last-child{border-bottom:1px dashed var(--rule);}
+  .options label{
+    display:flex; align-items:flex-start; gap:.7em;
+    padding:.6rem .2rem;
+    cursor:pointer;
+    font-size:.94rem;
+    color:var(--ink);
+  }
+  .options input[type="radio"]{
+    margin-top:.28em;
+    accent-color:var(--brass-deep);
+    flex:0 0 auto;
+  }
+  .options li.answer-correct label{color:var(--brass-deep); font-weight:600;}
+  .options li.answer-wrong-pick label{color:var(--rust); font-weight:600; text-decoration:line-through;}
+  .options li.locked label{cursor:default;}
+
+  .feedback{
+    display:none;
+    margin-top:.9rem;
+    padding:.8rem .95rem;
+    font-size:.88rem;
+    border-radius:2px;
+  }
+  .feedback.show{display:block;}
+  .qcard.correct .feedback{background:var(--brass-bg); color:#5B4415;}
+  .qcard.incorrect .feedback{background:var(--rust-bg); color:#6E2F1F;}
+  .feedback b{display:block; margin-bottom:.2rem; font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase;}
+
+  /* ===== Sticky action bar ===== */
+  .action-bar{
+    position:fixed; left:0; right:0; bottom:0; z-index:40;
+    background:var(--ink);
+    border-top:1px solid #3A4256;
+    padding:.85rem 1.5rem;
+  }
+  .action-inner{
+    max-width:760px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  }
+  .answered-count{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.8rem;
+    color:#C9BE9E;
+  }
+  .answered-count b{color:var(--paper);}
+  button.grade-btn{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:.92rem;
+    background:var(--brass);
+    color:#1B2430;
+    border:none;
+    padding:.68rem 1.5rem;
+    cursor:pointer;
+    letter-spacing:.01em;
+    transition:background .2s, transform .1s;
+  }
+  button.grade-btn:hover{background:#B68C3E;}
+  button.grade-btn:active{transform:translateY(1px);}
+  button.grade-btn.secondary{
+    background:transparent;
+    color:var(--paper);
+    border:1px solid #55607A;
+  }
+  button.grade-btn.secondary:hover{background:#232C3D;}
+  .nudge{
+    font-size:.78rem; color:var(--rust);
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* ===== Results panel ===== */
+  #results{
+    display:none;
+    background:var(--ink);
+    color:var(--paper);
+    padding:2.2rem 1.6rem;
+    margin:0 0 3rem;
+    position:relative;
+  }
+  #results.show{display:block;}
+  #results::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:6px;
+    background:repeating-linear-gradient(90deg, var(--brass) 0 14px, transparent 14px 22px);
+    opacity:.55;
+  }
+  .results-top{
+    display:flex; align-items:center; gap:1.6rem; flex-wrap:wrap;
+    margin-bottom:1.4rem;
+  }
+  .score-badge{
+    font-family:'Source Serif 4', serif;
+    font-weight:700;
+    font-size:3rem;
+    line-height:1;
+    color:var(--brass);
+    border:3px solid var(--brass);
+    border-radius:50%;
+    width:110px; height:110px;
+    display:flex; align-items:center; justify-content:center;
+    flex:0 0 auto;
+  }
+  .score-badge span{font-size:.42em; display:block; font-family:'IBM Plex Mono',monospace; font-weight:400; color:#C9BE9E; margin-top:.2em;}
+  .verdict h2{
+    font-family:'Source Serif 4', serif;
+    font-size:1.4rem;
+    margin:0 0 .4rem;
+  }
+  .verdict p{margin:0; color:#D8D2BE; font-size:.94rem; max-width:44ch;}
+
+  table.breakdown{
+    width:100%; border-collapse:collapse;
+    font-size:.88rem;
+    margin-top:1rem;
+  }
+  table.breakdown th{
+    text-align:left;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.7rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:#9CA3B5;
+    padding:.4rem .5rem;
+    border-bottom:1px solid #3A4256;
+  }
+  table.breakdown td{
+    padding:.55rem .5rem;
+    border-bottom:1px solid #2A3346;
+  }
+  .status-pill{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    padding:.15rem .55rem;
+    border-radius:20px;
+    display:inline-block;
+  }
+  .status-pill.ok{background:rgba(160,122,51,.25); color:#D9BE7E;}
+  .status-pill.mid{background:rgba(255,255,255,.08); color:#C9BE9E;}
+  .status-pill.weak{background:rgba(165,75,54,.25); color:#E39E8E;}
+  .review-link{color:var(--brass); font-size:.82rem; text-decoration:none;}
+  .review-link:hover{text-decoration:underline;}
+
+  footer{
+    max-width:760px; margin:0 auto; padding:0 1.5rem 5rem;
+    font-size:.82rem; color:var(--ink-soft);
+    text-align:center;
+  }
+
+  @media (max-width:600px){
+    h1{font-size:1.6rem;}
+    .score-badge{width:90px; height:90px; font-size:2.3rem;}
+    .action-inner{flex-direction:column; align-items:stretch; gap:.6rem;}
+    button.grade-btn{width:100%;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Auto-évaluation · Fin de formation</div>
+    <h1>QCM — Séance 1 : Introduction à Python pour les SHS</h1>
+    <p class="hero-desc">25 questions pour vérifier, section par section, ce que vous avez retenu de la journée — des bases du langage jusqu'à la visualisation, en passant par le jeu de données <span class="mono">auc.csv</span>.</p>
+    <div class="hero-meta">
+      <div>⏱ <b>15–20 min</b></div>
+      <div>📋 <b>25 questions</b></div>
+      <div>🎯 <b>1 réponse correcte / question</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="rail-wrap">
+  <nav class="rail" id="rail"></nav>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<main>
+  <div class="intro-note">
+    <strong>Comment ça marche :</strong> répondez à chaque question, puis cliquez sur <em>« Corriger mon QCM »</em> en bas de page. Vous obtiendrez votre score global, un détail par section, et l'explication de chaque réponse — de quoi savoir précisément quelles parties du notebook mériteraient d'être revues.
+  </div>
+
+  <div id="quiz-root"></div>
+
+  <div id="results">
+    <div class="results-top">
+      <div class="score-badge" id="scoreBadge">–<span>/ 25</span></div>
+      <div class="verdict">
+        <h2 id="verdictTitle"></h2>
+        <p id="verdictText"></p>
+      </div>
+    </div>
+    <table class="breakdown">
+      <thead><tr><th>Section</th><th>Score</th><th>Statut</th><th></th></tr></thead>
+      <tbody id="breakdownBody"></tbody>
+    </table>
+  </div>
+
+  <footer>Ce QCM porte sur le contenu du notebook « Séance 1 : Introduction à Python pour les SHS ». Vous pouvez le recommencer autant de fois que nécessaire.</footer>
+</main>
+
+<div class="action-bar">
+  <div class="action-inner">
+    <div class="answered-count" id="answeredCount"><b>0</b> / 25 questions répondues</div>
+    <div style="display:flex; gap:.6rem; align-items:center;">
+      <span class="nudge" id="nudge"></span>
+      <button class="grade-btn" id="gradeBtn">Corriger mon QCM</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SECTIONS = [
+  {id:1, label:"Les bases de Python", short:"1. Bases"},
+  {id:2, label:"Préliminaires", short:"2. Préliminaires"},
+  {id:3, label:"Manipuler un dataframe", short:"3. Manipuler"},
+  {id:4, label:"Explorer les données", short:"4. Explorer"},
+  {id:5, label:"Visualiser", short:"5. Visualiser"},
+  {id:6, label:"Synthèse", short:"6. Synthèse"},
+];
+
+const QUESTIONS = [
+  // ---------- SECTION 1 : Les bases de Python ----------
+  {
+    section:1,
+    q:"Quelle instruction Python permet de connaître le type d'une variable ?",
+    code:null,
+    options:["len(x)", "type(x)", "print(x)", "str(x)"],
+    correct:1,
+    explain:"<code>type()</code> renvoie le type d'un objet (<code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>...) — c'est la première fonction vue en section 1.1."
+  },
+  {
+    section:1,
+    q:"En Python, quel est l'index du premier élément d'une liste ?",
+    code:null,
+    options:["1", "0", "-1", "Cela dépend de la liste"],
+    correct:1,
+    explain:"Le comptage des positions commence toujours à 0 en Python — une source d'erreur fréquente au début (« off-by-one »)."
+  },
+  {
+    section:1,
+    q:"Que se passe-t-il lorsqu'on exécute ce code ?",
+    code:"age = 30\nprint(age = 32)",
+    options:["Affiche 32", "Affiche 30", "Provoque une erreur", "Affiche True"],
+    correct:2,
+    explain:"<code>=</code> est l'opérateur d'<b>affectation</b>, pas de comparaison : on ne peut pas l'utiliser de cette façon à l'intérieur d'un appel de fonction comme <code>print()</code>. C'est exactement le piège signalé dans l'encadré ⚠️ de la section 1.2 — il faut <code>==</code> pour comparer deux valeurs."
+  },
+  {
+    section:1,
+    q:"Vous voulez associer à chaque étudiant (par son nom) son année de diplomation. Quelle structure de données est la plus adaptée ?",
+    code:null,
+    options:["Une liste", "Un tuple", "Un dictionnaire", "Une boucle for"],
+    correct:2,
+    explain:"Un dictionnaire associe des <b>clés</b> (ici les noms) à des <b>valeurs</b> (ici les années) — c'est exactement ce principe qui sera réutilisé cet après-midi pour renommer des colonnes avec <code>.rename(columns={...})</code>."
+  },
+  {
+    section:1,
+    q:"Quelle est la principale différence entre une liste et un tuple en Python ?",
+    code:null,
+    options:["Un tuple ne peut contenir que des nombres", "Une liste est modifiable, un tuple ne l'est pas", "Un tuple s'affiche plus vite", "Il n'y a aucune différence"],
+    correct:1,
+    explain:"La liste est <b>mutable</b> (on peut ajouter, retirer, modifier des éléments après coup) ; le tuple est <b>immuable</b> : une fois créé, il ne change plus — utile pour des valeurs fixes comme des coordonnées."
+  },
+  {
+    section:1,
+    q:"Que renvoie l'appel <code>categorie(1916)</code> avec la fonction suivante ?",
+    code:"def categorie(annee):\n    if annee < 1914:\n        return \"avant-guerre\"\n    elif annee <= 1918:\n        return \"pendant la guerre\"\n    else:\n        return \"après-guerre\"",
+    options:["\"avant-guerre\"", "\"pendant la guerre\"", "\"après-guerre\"", "Une erreur"],
+    correct:1,
+    explain:"1916 n'est pas inférieur à 1914 (on saute le <code>if</code>), mais il est bien inférieur ou égal à 1918 (le <code>elif</code> est vrai) : la fonction renvoie donc <code>\"pendant la guerre\"</code>."
+  },
+
+  // ---------- SECTION 2 : Préliminaires ----------
+  {
+    section:2,
+    q:"Quelle fonction pandas permet de charger un fichier .csv dans un dataframe ?",
+    code:null,
+    options:["pd.load_csv()", "pd.read_csv()", "pd.import_csv()", "pd.open_csv()"],
+    correct:1,
+    explain:"<code>pd.read_csv()</code> est la fonction standard, avec des arguments optionnels comme <code>sep=</code> (séparateur) ou <code>encoding=</code>."
+  },
+  {
+    section:2,
+    q:"Par défaut, combien de lignes affiche <code>df.head()</code> (sans argument) ?",
+    code:null,
+    options:["3", "5", "10", "Toutes les lignes"],
+    correct:1,
+    explain:"Par défaut, <code>.head()</code> affiche les 5 premières lignes ; on peut ajuster ce nombre avec un argument, par exemple <code>df.head(10)</code>."
+  },
+  {
+    section:2,
+    q:"Que renvoie exactement <code>df.shape</code> ?",
+    code:null,
+    options:["La liste des noms de colonnes", "Le nombre de valeurs manquantes", "Un tuple (nombre de lignes, nombre de colonnes)", "Le type de chaque colonne"],
+    correct:2,
+    explain:"<code>.shape</code> renvoie un tuple à deux éléments : <code>(nombre de lignes, nombre de colonnes)</code> — pratique pour vérifier rapidement la taille d'un jeu de données."
+  },
+  {
+    section:2,
+    q:"À quoi sert l'instruction <code>df.isna().sum()</code> ?",
+    code:null,
+    options:["À compter le nombre total de lignes du dataframe", "À compter le nombre de valeurs manquantes par colonne", "À supprimer les valeurs manquantes", "À faire la somme de toutes les colonnes numériques"],
+    correct:1,
+    explain:"<code>.isna()</code> renvoie une grille de <code>True</code>/<code>False</code> selon qu'une valeur est manquante ou non ; <code>.sum()</code> additionne ensuite ces booléens colonne par colonne, ce qui donne le nombre de NA par colonne."
+  },
+
+  // ---------- SECTION 3 : Manipuler un dataframe ----------
+  {
+    section:3,
+    q:"Quelle syntaxe permet de sélectionner plusieurs colonnes d'un dataframe <code>df</code>, sous forme d'un nouveau dataframe ?",
+    code:null,
+    options:["df[\"col1\", \"col2\"]", "df[[\"col1\", \"col2\"]]", "df.select(\"col1\", \"col2\")", "df(col1, col2)"],
+    correct:1,
+    explain:"Des crochets doubles contenant une <b>liste</b> de noms de colonnes — on retrouve ici directement la syntaxe des listes vue en section 1.3."
+  },
+  {
+    section:3,
+    q:"Pour renommer la colonne <code>\"Year_start\"</code> en <code>\"Start\"</code>, quelle instruction est correcte ?",
+    code:null,
+    options:["df.rename(columns={\"Start\": \"Year_start\"})", "df.rename(columns={\"Year_start\": \"Start\"})", "df.rename(\"Year_start\", \"Start\")", "df[\"Year_start\"] = \"Start\""],
+    correct:1,
+    explain:"Le dictionnaire passé à <code>.rename(columns=...)</code> s'écrit toujours <code>{ancien_nom: nouveau_nom}</code>."
+  },
+  {
+    section:3,
+    q:"Comment crée-t-on une nouvelle colonne <code>Duration</code>, égale à <code>End</code> moins <code>Start</code> ?",
+    code:null,
+    options:["df.Duration = End - Start", "df[\"Duration\"] = df[\"End\"] - df[\"Start\"]", "df.new(\"Duration\", End - Start)", "Duration = df[\"End\"] - df[\"Start\"]"],
+    correct:1,
+    explain:"On affecte directement le résultat du calcul à une nouvelle clé entre crochets — pandas crée la colonne si elle n'existe pas encore."
+  },
+  {
+    section:3,
+    q:"Quelle est la principale différence entre <code>del df[\"col\"]</code> et <code>df.drop(columns=[\"col\"])</code> ?",
+    code:null,
+    options:["Il n'y a aucune différence", "drop() peut supprimer plusieurs colonnes à la fois et ne modifie pas l'original par défaut", "del est plus récent que drop()", "drop() ne fonctionne que sur les lignes, pas les colonnes"],
+    correct:1,
+    explain:"<code>del</code> supprime immédiatement et définitivement une seule colonne. <code>.drop(columns=[...])</code> accepte une liste (donc plusieurs colonnes) et, sans <code>inplace=True</code>, renvoie un nouveau dataframe sans toucher à l'original — plus sûr en pratique."
+  },
+  {
+    section:3,
+    q:"Que fait la méthode <code>.drop_duplicates()</code> ?",
+    code:null,
+    options:["Elle supprime les valeurs manquantes", "Elle ne garde que les lignes uniques, en éliminant les doublons", "Elle supprime les colonnes inutiles", "Elle trie le dataframe par ordre alphabétique"],
+    correct:1,
+    explain:"Appliquée à une ou plusieurs colonnes, elle renvoie les combinaisons de valeurs uniques — très utile pour obtenir, par exemple, la liste des étudiants ou des universités sans répétition."
+  },
+  {
+    section:3,
+    q:"Pour sélectionner les étudiants chinois ET ayant commencé leurs études après 1920, quelle syntaxe est correcte ?",
+    code:null,
+    options:[
+      "df[df[\"Nationality\"]==\"Chinese\" &amp; df[\"Start\"]&gt;1920]",
+      "df[(df[\"Nationality\"]==\"Chinese\") &amp; (df[\"Start\"]&gt;1920)]",
+      "df[df[\"Nationality\"]==\"Chinese\" and df[\"Start\"]&gt;1920]",
+      "df.filter(\"Nationality\"==\"Chinese\", \"Start\"&gt;1920)"
+    ],
+    correct:1,
+    explain:"En pandas, chaque condition doit impérativement être placée entre parenthèses avant d'être combinée avec <code>&amp;</code> (ET) ou <code>|</code> (OU) — oublier les parenthèses est une erreur très fréquente."
+  },
+
+  // ---------- SECTION 4 : Explorer les données ----------
+  {
+    section:4,
+    q:"Quelle méthode permet de compter combien de fois chaque valeur apparaît dans une colonne ?",
+    code:null,
+    options:[".count()", ".value_counts()", ".sum()", ".unique()"],
+    correct:1,
+    explain:"<code>.value_counts()</code> renvoie, pour chaque valeur distincte d'une colonne, son nombre d'occurrences — trié par défaut du plus fréquent au moins fréquent."
+  },
+  {
+    section:4,
+    q:"À quoi sert l'enchaînement <code>df.groupby(\"Field\").agg(...)</code> ?",
+    code:null,
+    options:["À trier le dataframe par discipline", "À calculer une statistique résumée pour chaque groupe (ici, chaque discipline)", "À supprimer les disciplines en double", "À créer automatiquement un graphique par discipline"],
+    correct:1,
+    explain:"<code>.groupby()</code> regroupe les lignes selon une ou plusieurs variables ; <code>.agg()</code> calcule ensuite, pour chaque groupe, une statistique de synthèse (min, max, mean...) — l'équivalent d'un tableau croisé dynamique."
+  },
+  {
+    section:4,
+    q:"Après un <code>.groupby().agg()</code>, à quoi sert généralement l'appel à <code>.reset_index()</code> ?",
+    code:null,
+    options:["Il supprime le dataframe", "Il transforme les colonnes de regroupement en colonnes normales du dataframe", "Il réinitialise toutes les valeurs à zéro", "Il trie les données par ordre croissant"],
+    correct:1,
+    explain:"Après un <code>.groupby()</code>, les variables de regroupement deviennent temporairement un « index ». <code>.reset_index()</code> les transforme en colonnes ordinaires, un réflexe très fréquent pour manipuler ensuite le résultat normalement."
+  },
+  {
+    section:4,
+    q:"Par défaut, comment pandas traite-t-il les valeurs manquantes (NA) dans une fonction d'agrégation comme <code>.mean()</code> ou <code>.max()</code> ?",
+    code:null,
+    options:["Il les remplace par 0", "Il provoque une erreur", "Il les ignore et calcule sur les valeurs disponibles", "Il les remplace par la moyenne des autres colonnes"],
+    correct:2,
+    explain:"Par défaut, pandas ignore les NA dans les fonctions d'agrégation courantes (min, max, mean, sum...) — le calcul se fait uniquement sur les valeurs effectivement présentes."
+  },
+
+  // ---------- SECTION 5 : Visualiser ----------
+  {
+    section:5,
+    q:"Quelle bibliothèque avons-nous utilisée pour produire des graphiques interactifs (zoom, info-bulles au survol) ?",
+    code:null,
+    options:["matplotlib", "seaborn", "plotly.express", "pandas"],
+    correct:2,
+    explain:"<code>plotly.express</code> (souvent importé sous l'alias <code>px</code>) permet de produire directement des graphiques interactifs, contrairement à matplotlib/seaborn qui produisent des images statiques."
+  },
+  {
+    section:5,
+    q:"Pour comparer la durée des études selon la nationalité, quel type de graphique est le plus adapté ?",
+    code:null,
+    options:["Un histogramme", "Un boxplot", "Un nuage de points (scatterplot)", "Un diagramme circulaire"],
+    correct:1,
+    explain:"Le boxplot est fait pour croiser une variable <b>catégorielle</b> (ici la nationalité) et une variable <b>quantitative</b> (ici la durée), en montrant la distribution de cette dernière pour chaque catégorie."
+  },
+  {
+    section:5,
+    q:"Dans <code>sns.barplot(data=df, x=\"Nationality\", y=\"n\", hue=\"Nationality\")</code>, à quoi sert l'argument <code>hue</code> ?",
+    code:null,
+    options:["À trier les barres par ordre décroissant", "À définir la taille du graphique", "À colorer les éléments selon une variable donnée", "À ajouter un titre au graphique"],
+    correct:2,
+    explain:"<code>hue</code> colore les éléments du graphique (barres, points...) selon les modalités d'une variable — très utile pour distinguer visuellement des groupes."
+  },
+  {
+    section:5,
+    q:"Quel argument de <code>sns.regplot()</code> permet d'ajouter une courbe de tendance lissée sur un nuage de points ?",
+    code:null,
+    options:["trend=True", "smooth=True", "lowess=True", "line=True"],
+    correct:2,
+    explain:"<code>lowess=True</code> ajoute une courbe de tendance lissée selon la méthode LOWESS — l'équivalent d'une régression locale non paramétrique."
+  },
+
+  // ---------- SECTION 6 : Synthèse ----------
+  {
+    section:6,
+    q:"Vous récupérez un nouveau jeu de données à explorer de A à Z. Quel enchaînement d'étapes correspond le mieux à la logique vue aujourd'hui ?",
+    code:null,
+    options:[
+      "Visualiser → Filtrer → Charger → Renommer",
+      "Charger et inspecter → Sélectionner/nettoyer les colonnes → Filtrer/regrouper → Visualiser",
+      "Renommer → Charger → Supprimer les NA → Visualiser",
+      "Visualiser d'abord, comprendre les données ensuite"
+    ],
+    correct:1,
+    explain:"C'est exactement la progression de la journée : on charge et inspecte les données (section 2), on les nettoie et on les met en forme (section 3), on les explore statistiquement (section 4), puis seulement on les visualise (section 5) — une bonne pratique à conserver pour vos propres projets."
+  },
+];
+
+// ---------- Render ----------
+const root = document.getElementById("quiz-root");
+const rail = document.getElementById("rail");
+let answers = new Array(QUESTIONS.length).fill(null);
+let graded = false;
+
+SECTIONS.forEach(s => {
+  const a = document.createElement("a");
+  a.href = "#sec-" + s.id;
+  a.className = "rail-tab";
+  a.dataset.section = s.id;
+  a.innerHTML = `<span class="num">${String(s.id).padStart(2,"0")}</span><span>${s.short}</span><span class="dot"></span>`;
+  rail.appendChild(a);
+});
+
+function renderQuiz(){
+  root.innerHTML = "";
+  SECTIONS.forEach(sec => {
+    const secQuestions = QUESTIONS.map((q,i)=>({...q, idx:i})).filter(q => q.section === sec.id);
+    if(secQuestions.length === 0) return;
+
+    const heading = document.createElement("div");
+    heading.className = "section-heading";
+    heading.id = "sec-" + sec.id;
+    heading.innerHTML = `<span class="idx">${String(sec.id).padStart(2,"0")}</span><span class="title">${sec.label}</span><span class="time">${secQuestions.length} question${secQuestions.length>1?"s":""}</span>`;
+    root.appendChild(heading);
+
+    secQuestions.forEach(q => {
+      const card = document.createElement("div");
+      card.className = "qcard";
+      card.id = "q-" + q.idx;
+
+      let codeHtml = "";
+      if(q.code){
+        codeHtml = `<pre><code>${q.code.replace(/&/g,"&amp;").replace(/</g,"&lt;")}</code></pre>`;
+      }
+
+      let optsHtml = "";
+      q.options.forEach((opt, oi) => {
+        optsHtml += `
+          <li data-oi="${oi}">
+            <label>
+              <input type="radio" name="q${q.idx}" value="${oi}">
+              <span>${opt}</span>
+            </label>
+          </li>`;
+      });
+
+      card.innerHTML = `
+        <span class="qnum">Question ${q.idx + 1} / ${QUESTIONS.length} — ${sec.label}</span>
+        <p class="qtext">${q.q}</p>
+        ${codeHtml}
+        <ul class="options">${optsHtml}</ul>
+        <div class="feedback"><b></b><span></span></div>
+      `;
+      root.appendChild(card);
+    });
+  });
+
+  // attach listeners
+  QUESTIONS.forEach((q, idx) => {
+    document.querySelectorAll(`input[name="q${idx}"]`).forEach(input => {
+      input.addEventListener("change", (e) => {
+        if(graded) return;
+        answers[idx] = parseInt(e.target.value);
+        updateProgress();
+      });
+    });
+  });
+}
+
+function updateProgress(){
+  const answeredTotal = answers.filter(a => a !== null).length;
+  document.getElementById("answeredCount").innerHTML = `<b>${answeredTotal}</b> / ${QUESTIONS.length} questions répondues`;
+  document.getElementById("progressFill").style.width = (answeredTotal / QUESTIONS.length * 100) + "%";
+
+  SECTIONS.forEach(sec => {
+    const secIdxs = QUESTIONS.map((q,i)=>i).filter(i => QUESTIONS[i].section === sec.id);
+    const done = secIdxs.every(i => answers[i] !== null);
+    const tab = document.querySelector(`.rail-tab[data-section="${sec.id}"]`);
+    if(tab) tab.classList.toggle("complete", done);
+  });
+
+  document.getElementById("nudge").textContent = "";
+}
+
+// active tab highlight on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const id = e.target.id.replace("sec-","");
+      document.querySelectorAll(".rail-tab").forEach(t => t.classList.remove("active"));
+      const tab = document.querySelector(`.rail-tab[data-section="${id}"]`);
+      if(tab) tab.classList.add("active");
+    }
+  });
+}, {rootMargin:"-20% 0px -70% 0px"});
+
+function observeSections(){
+  document.querySelectorAll(".section-heading").forEach(h => observer.observe(h));
+}
+
+// ---------- Grading ----------
+function grade(){
+  const unanswered = answers.map((a,i)=>a===null?i+1:null).filter(x=>x);
+  if(unanswered.length > 0){
+    document.getElementById("nudge").textContent =
+      unanswered.length <= 6
+        ? `Il manque une réponse aux questions : ${unanswered.join(", ")}`
+        : `${unanswered.length} questions sans réponse`;
+    const firstMissing = unanswered[0]-1;
+    document.getElementById("q-"+firstMissing).scrollIntoView({behavior:"smooth", block:"center"});
+    return;
+  }
+
+  graded = true;
+  let correctCount = 0;
+  const sectionStats = {};
+  SECTIONS.forEach(s => sectionStats[s.id] = {correct:0,total:0});
+
+  QUESTIONS.forEach((q, idx) => {
+    const card = document.getElementById("q-"+idx);
+    const chosen = answers[idx];
+    const isCorrect = chosen === q.correct;
+    if(isCorrect) correctCount++;
+    sectionStats[q.section].total++;
+    if(isCorrect) sectionStats[q.section].correct++;
+
+    card.classList.add(isCorrect ? "correct" : "incorrect");
+
+    const lis = card.querySelectorAll(".options li");
+    lis.forEach(li => {
+      const oi = parseInt(li.dataset.oi);
+      li.classList.add("locked");
+      li.querySelector("input").disabled = true;
+      if(oi === q.correct) li.classList.add("answer-correct");
+      if(oi === chosen && chosen !== q.correct) li.classList.add("answer-wrong-pick");
+    });
+
+    const fb = card.querySelector(".feedback");
+    fb.classList.add("show");
+    fb.querySelector("b").textContent = isCorrect ? "Correct" : "À revoir";
+    fb.querySelector("span").innerHTML = q.explain;
+  });
+
+  renderResults(correctCount, sectionStats);
+
+  document.getElementById("gradeBtn").textContent = "Recommencer";
+  document.getElementById("nudge").textContent = "";
+  document.getElementById("results").classList.add("show");
+  document.getElementById("results").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+function renderResults(correctCount, sectionStats){
+  const pct = Math.round(correctCount / QUESTIONS.length * 100);
+  document.getElementById("scoreBadge").innerHTML = `${correctCount}<span>/ ${QUESTIONS.length}</span>`;
+
+  let title, text;
+  if(pct >= 85){
+    title = "Les bases sont solidement acquises";
+    text = "Vous êtes prêt·e à appliquer ces compétences à vos propres corpus. N'hésitez pas à relire les sections où une ou deux erreurs subsistent, puis passez à la Séance 2.";
+  } else if(pct >= 60){
+    title = "Vous êtes sur la bonne voie";
+    text = "L'essentiel est là, mais quelques notions méritent d'être consolidées avant la prochaine séance — reportez-vous aux sections signalées ci-dessous dans le notebook.";
+  } else {
+    title = "Encore un peu de pratique nécessaire";
+    text = "C'est normal après une première journée dense : reprenez le notebook section par section, refaites les exercices « À vous de jouer », puis retentez ce QCM.";
+  }
+  document.getElementById("verdictTitle").textContent = `${pct}% — ${title}`;
+  document.getElementById("verdictText").textContent = text;
+
+  const tbody = document.getElementById("breakdownBody");
+  tbody.innerHTML = "";
+  SECTIONS.forEach(sec => {
+    const stat = sectionStats[sec.id];
+    const secPct = Math.round(stat.correct/stat.total*100);
+    let statusClass = "mid", statusLabel = "Correct";
+    if(secPct >= 80){statusClass="ok"; statusLabel="Acquis";}
+    else if(secPct < 60){statusClass="weak"; statusLabel="À consolider";}
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${sec.label}</td>
+      <td class="mono">${stat.correct} / ${stat.total}</td>
+      <td><span class="status-pill ${statusClass}">${statusLabel}</span></td>
+      <td>${secPct < 80 ? `<a class="review-link" href="#sec-${sec.id}">Revoir cette section ↑</a>` : ""}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function resetQuiz(){
+  graded = false;
+  answers = new Array(QUESTIONS.length).fill(null);
+  document.getElementById("results").classList.remove("show");
+  document.getElementById("gradeBtn").textContent = "Corriger mon QCM";
+  renderQuiz();
+  observeSections();
+  updateProgress();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+document.getElementById("gradeBtn").addEventListener("click", () => {
+  if(graded){
+    resetQuiz();
+  } else {
+    grade();
+  }
+});
+
+renderQuiz();
+observeSections();
+updateProgress();
+</script>
+</body>
+</html>
