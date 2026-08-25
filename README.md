@@ -1,54 +1,72 @@
-# Séance 4 — Introduction aux LLM avec Ollama : construire un mini RAG
+# Python pour les SHS
 
-Quatrième et dernier module du cycle : utiliser un grand modèle de langage
-(LLM) en local avec **Ollama**, et construire un système de génération
-augmentée par récupération (**RAG**) sur le corpus de presse olympique.
+Un cycle de quatre journées de formation à Python, conçu pour des
+chercheurs et chercheuses en sciences humaines et sociales sans expérience
+préalable de programmation. Chaque séance est une journée complète (7h),
+autonome, et construite autour de jeux de données réels issus de l'histoire
+sociale de la Chine républicaine.
 
-**Prérequis :** Séances 1 à 3 (pandas, fouille de texte, réseaux).
+Les quatre séances forment une **progression cohérente** : on part de la
+manipulation de tableaux de données (Séance 1), on l'étend au texte brut
+(Séance 2), puis à la structure relationnelle des données (Séance 3), et
+enfin à l'interaction avec des modèles de langage ancrés dans un corpus
+(Séance 4). Chaque séance réutilise, autant que possible, les jeux de
+données et les acquis des séances précédentes.
 
-## Objectifs
+## Objectifs pédagogiques du cycle
 
-- Comprendre ce qu'est un LLM, ses usages et ses limites (hallucinations) —
-  et pourquoi des modèles **locaux** présentent un intérêt particulier pour
-  la recherche (confidentialité, reproductibilité, coût, fonctionnement hors
-  ligne).
-- Installer et utiliser Ollama pour dialoguer avec un LLM local en Python.
-- Comprendre les *embeddings* et la similarité sémantique.
-- Construire un système RAG complet : découpage de documents (*chunking*),
-  indexation, recherche, génération de réponses ancrées dans les sources.
-- Évaluer et fiabiliser les réponses produites (vérification des citations,
-  *prompt engineering*).
+- Donner à des chercheur·ses sans formation en programmation une autonomie
+  réelle en Python pour leurs propres corpus (tableaux, texte, réseaux).
+- Privilégier la pratique : chaque notebook alterne explications, démonstrations
+  et exercices, avec des solutions repliables pour l'auto-évaluation.
+- Ancrer chaque méthode dans un cas d'usage historique concret, plutôt que
+  dans des exemples abstraits.
+- Donner les moyens de continuer à apprendre en autonomie après la
+  formation (aide-mémoire, index des fonctions, ressources) plutôt que de
+  seulement transmettre des recettes.
 
-## Contenu du dossier
+## Structure du dépôt
 
-| Fichier | Description |
-|---|---|
-| `Seance4_LLM_Ollama_RAG.ipynb` | Notebook de cours (1 journée / 7h), avec exercices intégrés et solutions repliables. |
-| `data/olympic_corpus.csv` | Corpus de presse utilisé pour construire le mini RAG (même corpus que la Séance 2). |
-
-## ⚠️ Droits de réutilisation des données
-
-Voir la remarque dans `../02-fouille-de-texte/README.md` : `olympic_corpus.csv`
-est dérivé d'une base commerciale (ProQuest) — vérifiez les conditions de
-redistribution avant de rendre ce dépôt public.
-
-## Pour commencer
-
-Ollama est une application, pas un paquet Python : elle s'installe
-séparément.
-
-```bash
-# 1. Installer Ollama (macOS/Windows : télécharger sur ollama.com/download)
-curl -fsSL https://ollama.com/install.sh | sh   # Linux
-
-# 2. Télécharger les modèles utilisés dans ce notebook
-ollama pull llama3.2
-ollama pull nomic-embed-text
-
-# 3. Installer le client Python
-pip install ollama pandas numpy scikit-learn matplotlib seaborn
+```
+python-pour-les-shs/
+├── 01-introduction-python/     Séance 1 — Bases de Python, pandas, visualisation
+├── 02-fouille-de-texte/        Séance 2 — Fouille de texte (KWIC, n-grammes, BERTopic, NER)
+├── 03-analyse-reseaux/         Séance 3 — Analyse et visualisation de réseaux (NetworkX)
+├── 04-llm-rag/                 Séance 4 — LLM locaux avec Ollama, mini RAG
+├── requirements.txt            Dépendances Python agrégées des 4 séances
+└── README.md                   Ce fichier
 ```
 
-Ouvrez ensuite `Seance4_LLM_Ollama_RAG.ipynb`. Un ordinateur sans carte
-graphique dédiée convient (le modèle `llama3.2` tourne correctement sur
-CPU), au prix d'un temps de réponse un peu plus long.
+Chaque dossier `0X-.../` est **autonome** et contient :
+
+- un notebook de cours (`Seance*.ipynb`), avec son propre déroulé horaire ;
+- le cas échéant, un exercice à faire à la maison et/ou un quiz
+  d'auto-évaluation ;
+- un sous-dossier `data/` avec les jeux de données nécessaires ;
+- un `README.md` local détaillant les objectifs, le contenu et la marche à
+  suivre pour cette séance précise.
+
+## Vue d'ensemble des quatre séances
+
+| # | Séance | Compétences principales | Jeux de données |
+|---|---|---|---|
+| 1 | [Introduction à Python](01-introduction-python/) | Bases du langage, pandas, matplotlib/seaborn/plotly | `auc.csv`*, `youmei.csv` |
+| 2 | [Fouille de texte](02-fouille-de-texte/) | KWIC, n-grammes, BERTopic, spaCy (NER), sentiment | `olympic_corpus.csv` |
+| 3 | [Analyse de réseaux](03-analyse-reseaux/) | NetworkX, réseaux bipartis, centralités, communautés | `auc.csv`*, `olympic_corpus.csv`, `youmei.csv`, `association.csv`, `affiliation.csv` |
+| 4 | [LLM & RAG](04-llm-rag/) | Ollama, embeddings, retrieval-augmented generation | `olympic_corpus.csv` |
+
+\* `auc.csv` n'est pas inclus dans ce dépôt — voir plus bas.
+
+## Prérequis techniques
+
+- **Python** via [Anaconda](https://www.anaconda.com/download) (installation
+  locale) ou [Google Colab](https://colab.research.google.com) (aucune
+  installation requise).
+- **Jupyter Notebook**, inclus avec Anaconda ou disponible nativement sur
+  Colab.
+- Pour la Séance 4 uniquement : [Ollama](https://ollama.com/download), une
+  application à installer séparément (voir le README de ce dossier).
+
+Un fichier [`requirements.txt`](requirements.txt) agrège l'ensemble des
+dépendances Python des quatre séances ; chaque dossier de séance précise
+également, dans son propre README, les seules dépendances qui le concernent.

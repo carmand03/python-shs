@@ -1,0 +1,27 @@
+# Python pour les SHS — dépendances agrégées des 4 séances
+# Installer avec : pip install -r requirements.txt
+#
+# Chaque séance ne nécessite pas l'ensemble de ces paquets : voir le README
+# de chaque dossier 0X-.../ pour la liste exacte des dépendances de cette
+# séance précise.
+
+# --- Séance 1 : Introduction à Python ---
+pandas
+numpy
+matplotlib
+seaborn
+plotly
+
+# --- Séance 2 : Fouille de texte ---
+nltk
+scikit-learn
+spacy               # après installation : python -m spacy download en_core_web_sm
+bertopic
+sentence-transformers
+
+# --- Séance 3 : Analyse de réseaux ---
+networkx
+pyvis
+
+# --- Séance 4 : LLM & RAG ---
+ollama              # nécessite l'application Ollama installée séparément (ollama.com/download)
