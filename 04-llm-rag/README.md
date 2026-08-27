@@ -1,4 +1,4 @@
-# Séance 4 — Introduction aux LLM avec Ollama : construire un mini RAG
+# Séance 4 — Introduction aux LLMs avec Ollama : construire un mini RAG
 
 Quatrième et dernier module du cycle : utiliser un grand modèle de langage
 (LLM) en local avec **Ollama**, et construire un système de génération
