@@ -55,8 +55,6 @@ Chaque dossier `0X-.../` est **autonome** et contient :
 | 3 | [Analyse de réseaux](03-analyse-reseaux/) | NetworkX, réseaux bipartis, centralités, communautés | `auc.csv`*, `olympic_corpus.csv`, `youmei.csv`, `association.csv`, `affiliation.csv` |
 | 4 | [LLM & RAG](04-llm-rag/) | Ollama, embeddings, retrieval-augmented generation | `olympic_corpus.csv` |
 
-\* `auc.csv` n'est pas inclus dans ce dépôt — voir plus bas.
-
 ## Prérequis techniques
 
 - **Python** via [Anaconda](https://www.anaconda.com/download) (installation
