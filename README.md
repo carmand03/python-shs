@@ -8,7 +8,7 @@ sociale de la Chine républicaine.
 
 Les quatre séances forment une **progression cohérente** : on part de la
 manipulation de tableaux de données (Séance 1), on l'étend au texte brut
-(Séance 2), puis à la structure relationnelle des données (Séance 3), et
+(Séance 2), puis à la structure relationnelle et spatiale des données (Séance 3), et
 enfin à l'interaction avec des modèles de langage ancrés dans un corpus
 (Séance 4). Chaque séance réutilise, autant que possible, les jeux de
 données et les acquis des séances précédentes.
@@ -31,7 +31,7 @@ données et les acquis des séances précédentes.
 python-pour-les-shs/
 ├── 01-introduction-python/     Séance 1 — Bases de Python, pandas, visualisation
 ├── 02-fouille-de-texte/        Séance 2 — Fouille de texte (KWIC, n-grammes, BERTopic, NER)
-├── 03-analyse-reseaux/         Séance 3 — Analyse et visualisation de réseaux (NetworkX)
+├── 03-analyse-reseaux/         Séance 3 — Analyse et visualisation de réseaux (NetworkX) et cartes (geopandas) 
 ├── 04-llm-rag/                 Séance 4 — LLM locaux avec Ollama, mini RAG
 ├── requirements.txt            Dépendances Python agrégées des 4 séances
 └── README.md                   Ce fichier
@@ -52,7 +52,7 @@ Chaque dossier `0X-.../` est **autonome** et contient :
 |---|---|---|---|
 | 1 | [Introduction à Python](01-introduction-python/) | Bases du langage, pandas, matplotlib/seaborn/plotly | `auc.csv`*, `youmei.csv` |
 | 2 | [Fouille de texte](02-fouille-de-texte/) | KWIC, n-grammes, BERTopic, spaCy (NER), sentiment | `olympic_corpus.csv` |
-| 3 | [Analyse de réseaux](03-analyse-reseaux/) | NetworkX, réseaux bipartis, centralités, communautés | `auc.csv`*, `olympic_corpus.csv`, `youmei.csv`, `association.csv`, `affiliation.csv` |
+| 3 | [Analyse de réseaux et cartographie](03-analyse-reseaux/) | NetworkX, réseaux bipartis, centralités, communautés, cartes choroplètes, cartes de flux | `auc.csv`*, (`olympic_corpus.csv`), `youmei.csv`, `association.csv`, `affiliation.csv` |
 | 4 | [LLM & RAG](04-llm-rag/) | Ollama, embeddings, retrieval-augmented generation | `olympic_corpus.csv` |
 
 ## Prérequis techniques
