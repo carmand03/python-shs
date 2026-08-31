@@ -52,7 +52,7 @@ Chaque dossier `0X-.../` est **autonome** et contient :
 |---|---|---|---|
 | 1 | [Introduction à Python](01-introduction-python/) | Bases du langage, pandas, matplotlib/seaborn/plotly | `auc.csv`*, `youmei.csv` |
 | 2 | [Fouille de texte](02-fouille-de-texte/) | KWIC, n-grammes, BERTopic, spaCy (NER), sentiment | `olympic_corpus.csv` |
-| 3 | [Analyse de réseaux et cartographie](03-analyse-reseaux/) | NetworkX, réseaux bipartis, centralités, communautés, cartes choroplètes, cartes de flux | `auc.csv`*, (`olympic_corpus.csv`), `youmei.csv`, `association.csv`, `affiliation.csv` |
+| 3 | [Analyse de réseaux et cartographie](03-analyse-reseaux/) | NetworkX, réseaux bipartis, centralités, communautés, cartes choroplètes, cartes de points, cartes de flux | `auc.csv`*, (`olympic_corpus.csv`), `youmei.csv`, `association.csv`, `affiliation.csv` |
 | 4 | [LLM & RAG](04-llm-rag/) | Ollama, embeddings, retrieval-augmented generation | `olympic_corpus.csv` |
 
 ## Prérequis techniques
