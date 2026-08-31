@@ -37,7 +37,7 @@ les réseaux de co-occurrence textuelle).
 
 | Fichier | Description |
 |---|---|
-| `Seance3_ReseauxPython.ipynb` | Notebook de cours (1 journée / 7h) : réseaux (sections 1-3), cartographie (sections 4-6), synthèse réseaux + cartes (section 7), mini-projet (section 8). Une annexe optionnelle (hors format 7h) reprend un réseau de co-occurrence textuelle à partir du corpus de la Séance 2. |
+| `Seance3_Reseaux_Cartes.ipynb` | Notebook de cours (1 journée / 7h) : réseaux (sections 1-3), cartographie (sections 4-6), synthèse réseaux + cartes (section 7), mini-projet (section 8). Une annexe optionnelle (hors format 7h) reprend un réseau de co-occurrence textuelle à partir du corpus de la Séance 2. |
 | `Exercice3_Python_reseaux.ipynb` | Exercice à faire à la maison, **centré sur les réseaux uniquement**, sur un jeu de données d'affiliations associatives (`association.csv`) — un terrain différent de celui du cours pour consolider les mêmes compétences réseau. |
 | `data/` | Jeux de données utilisés par les notebooks ci-dessus. |
 
@@ -62,6 +62,6 @@ les réseaux de co-occurrence textuelle).
 pip install pandas numpy matplotlib seaborn networkx pyvis geopandas folium geopy mapclassify
 ```
 
-Ouvrez `Seance3_ReseauxPython.ipynb` : `auc.csv` est déjà présent dans
+Ouvrez `Seance3_Reseaux_Cartes.ipynb` : `auc.csv` est déjà présent dans
 `data/`, aucune préparation supplémentaire n'est nécessaire pour suivre le
 notebook de cours de bout en bout.
