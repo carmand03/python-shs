@@ -22,6 +22,9 @@ sentence-transformers
 # --- Séance 3 : Analyse de réseaux ---
 networkx
 pyvis
+geopandas
+geopy
+folium
 
 # --- Séance 4 : LLM & RAG ---
 ollama              # nécessite l'application Ollama installée séparément (ollama.com/download)
