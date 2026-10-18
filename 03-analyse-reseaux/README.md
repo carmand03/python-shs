@@ -14,7 +14,7 @@ les réseaux de co-occurrence textuelle).
 **Réseaux**
 - Comprendre le vocabulaire de base de l'analyse de réseau (nœuds, liens,
   réseaux bipartis, projections).
-- Construire un réseau d'affiliation biparti université ↔ employeur à partir
+- Construire un réseau d'affiliation biparti étudiant ↔ université à partir
   d'un tableau de données (`auc.csv`).
 - Calculer des mesures de réseau : densité, composantes connexes,
   centralités (degré, intermédiarité, proximité, vecteur propre).
